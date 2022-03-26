@@ -59,6 +59,10 @@ const useStyles = makeStyles(theme => ({
 export default function History() {
     let { push, goBack } = useHistory();
     const { state, dispatch } = useContext(AppContext);
+    const [history, setHistory] = React.useState([]);
+    const classes = useStyles();
+    let lastLastDate = 0;
+    //TODO Add moment JS to calculate time
 
     useEffect(() => {
 
@@ -70,20 +74,8 @@ export default function History() {
     }, []);
 
     const handleHistory = (item: HistoryType) => {
-        dispatch({type: Action.ADD_TO_HISTORY, payload: {
-                id: item.id,
-                text: item.text,
-                date: item.date,
-            }
-        })
-
-        push('/result');
+       console.log("CLICKED", item);
     }
-
-    const [history, setHistory] = React.useState([]);
-    const classes = useStyles();
-    let lastLastDate = 0;
-    //TODO Add moment JS to calculate time
 
     return (
         <>

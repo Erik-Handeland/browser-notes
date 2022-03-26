@@ -1,5 +1,5 @@
 import React, { createContext, Dispatch, useReducer } from 'react'
-import { HistoryActions, historyReducer, draftReducer, settingsReducer, DraftActions, SettingsActions } from './reducers';
+import { draftReducer, DraftActions, settingsReducer } from './reducers';
 
 export type SettingsType = {
     cloud_sync: boolean,
@@ -18,13 +18,11 @@ export type HistoryType = {
 }
 
 type InitialStateType = {
-    history: HistoryType[];
     draft: DraftType;
     settings: SettingsType;
 }
 
 const initialState = {
-    history: [],
     draft: {
         text: "",
         buttonEnabled: false,
@@ -37,14 +35,13 @@ const initialState = {
 
 const AppContext = createContext<{
     state: InitialStateType;
-    dispatch: Dispatch<HistoryActions | DraftActions | SettingsActions>;
+    dispatch: Dispatch<DraftActions >;
 }>({
     state: initialState,
     dispatch: () => null
 });
 
-const mainReducer = ({ history, draft, settings }: InitialStateType, action: HistoryActions | DraftActions | SettingsActions ) => ({
-    history: historyReducer(history, action),
+const mainReducer = ({draft, settings }: InitialStateType, action: DraftActions  ) => ({
     draft: draftReducer(draft, action),
     settings: settingsReducer(settings, action),
 });

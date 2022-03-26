@@ -96,6 +96,9 @@ export const Settings = () => {
             <Button onClick={clearHistory}>Clear</Button>
           </ListItem>
         </Card>
+
+        <Typography variant={'h4'}>Attributions</Typography>
+        <Typography variant={'h4'}>Edit icons created by Kiranshastry - Flaticon</Typography>
       </List>
     </div>
   )
