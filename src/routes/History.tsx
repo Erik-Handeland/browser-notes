@@ -4,9 +4,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import { Card, IconButton, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { getLocalItem, getSyncItem } from '../chrome/storage';
-import { Action, Storage } from '../constants'
+import { Storage } from '../constants'
 import moment from "moment";
 import { AppContext, HistoryType } from "../AppContext";
 import { useHistory } from "react-router-dom";
@@ -57,8 +56,6 @@ const useStyles = makeStyles(theme => ({
 
 
 export default function History() {
-    let { push, goBack } = useHistory();
-    const { state, dispatch } = useContext(AppContext);
     const [history, setHistory] = React.useState([]);
     const classes = useStyles();
     let lastLastDate = 0;

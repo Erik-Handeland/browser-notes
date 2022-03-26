@@ -1,23 +1,16 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { AppContext } from "../AppContext";
-import { styled, alpha } from '@mui/material/styles';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
 import SaveIcon from '@mui/icons-material/Save';
 import IconButton from '@mui/material/IconButton';
-import Card from '@mui/material/Card';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
 import InputBase from '@mui/material/InputBase';
 import { MAX_TEXT_LENGTH, Action, Storage } from '../constants'
 import ErrorIcon from '@mui/icons-material/Error';
 import { Box, Typography } from '@mui/material';
 import clsx from 'clsx';
-import { makeStyles, createStyles } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
-import { useHistory } from "react-router-dom";
-import { addLocalItem, getSyncItem, getSyncItemAsync } from "../chrome/storage";
+import { addLocalItem} from "../chrome/storage";
 
 const useStyles = makeStyles((theme: Theme) => ({
     counterContainer: {

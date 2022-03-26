@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import './App.css';
-import { AppBar, Box, createMuiTheme, Divider, IconButton, Theme, ThemeProvider, Toolbar } from '@mui/material';
+import { AppBar, Box, createMuiTheme, Divider, IconButton, ThemeProvider, Toolbar } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { History as HistoryIcon, Settings as SettingsIcon, ContentPaste }  from '@mui/icons-material';
-import { AppProvider, AppContext } from './AppContext';
+import { AppProvider } from './AppContext';
 import { Storage } from './constants'
 import { Home } from './routes/Home';
 import { Settings } from './routes/Settings'

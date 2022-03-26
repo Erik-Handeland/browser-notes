@@ -1,6 +1,5 @@
-import { DraftType, HistoryType, SettingsType } from "./AppContext";
-import { setSyncItem, getSyncItem } from "./chrome/storage";
-import { Storage, Action, DEFAULT_CONTEXT } from "./constants"
+import { DraftType, SettingsType } from "./AppContext";
+import { Action } from "./constants"
 
 type ActionMap<M extends { [index: string]: any }> = {
     [Key in keyof M]: M[Key] extends undefined
