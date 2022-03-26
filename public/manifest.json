@@ -17,6 +17,7 @@
     "service_worker": "./static/js/background.js"
   },
   "permissions": [
+    "tabs",
     "storage",
     "contextMenus",
     "clipboardWrite"

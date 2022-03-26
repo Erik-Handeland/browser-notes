@@ -1,6 +1,11 @@
 import React, { createContext, Dispatch, useReducer } from 'react'
 import { draftReducer, DraftActions, settingsReducer } from './reducers';
 
+export type Tab = {
+    url: string,
+    favicon: string,
+}
+
 export type SettingsType = {
     cloud_sync: boolean,
     theme: boolean,
