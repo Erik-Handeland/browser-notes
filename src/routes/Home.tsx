@@ -84,7 +84,7 @@ export const Home = () => {
     const [tab, setTab] = React.useState<Tab>({ url: "", favicon: "" });
 
     const handleClick = (event: any) => {
-        performAction(text);
+        performAction();
     }
 
     useEffect(() => {
@@ -93,10 +93,11 @@ export const Home = () => {
         })
     }, []);
 
-    const performAction = async (text_note: string) => {
+    const performAction = async () => {
         const history = {
-            id: Math.floor(Math.random()),
-            text: text_note,
+            url: tab.url,
+            favicon: tab.favicon,
+            text: textBox,
             date: new Date().getTime(),
         }
 
@@ -141,6 +142,7 @@ export const Home = () => {
                                 e.currentTarget.value.length,
                                 e.currentTarget.value.length
                             )}
+                        onChange={updateUrlText}
                         value={tab.url}
                         inputProps={{ 'aria-label': 'Note window', 'height': '300px' }}
                     />

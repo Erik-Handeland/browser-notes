@@ -1,13 +1,13 @@
-import React, {useEffect } from "react";
+import React, { useEffect } from "react";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import { Card, IconButton, Typography } from '@mui/material';
+import { Avatar, Box, Card, IconButton, ListItemAvatar, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { getLocalItem } from '../typescript/storage';
 import { Storage } from '../app/constants'
 import moment from "moment";
-import {HistoryType } from "../app/AppContext";
+import { HistoryType } from "../app/AppContext";
 import { printDateInCorrectFormat } from "../typescript/utils";
 import clsx from "clsx";
 import HistoryIcon from '@mui/icons-material/History';
@@ -70,7 +70,7 @@ export default function History() {
     }, []);
 
     const handleHistory = (item: HistoryType) => {
-       console.log("CLICKED", item);
+        console.log("CLICKED", item);
     }
 
     return (
@@ -87,28 +87,42 @@ export default function History() {
                 )
             }
             <List className={classes.list} >
-            {history?.reverse().map((item: any, index: number) => {
-                let showitem = false;
-                if(item.date - lastLastDate > 43200) {
-                    lastLastDate = item.date;
-                    showitem = true;
-                }
-                return (
-            <>
-            {showitem && (<Typography variant='h4'>{moment(item.date).format('MMMM D, YYYY')}</Typography>)}
-            <Card classes={{root: classes.card}}>
-                <ListItem key={item?.text}>
-                    <ListItemText primary={item?.text} secondary={printDateInCorrectFormat(item.date)} />
-                    <IconButton color="primary" aria-label="View Note" onClick={(e) => handleHistory(item)}>
-                      <InfoOutlinedIcon />
-                    </IconButton>
-                </ListItem>
-            </Card>
+                {history?.reverse().map((item: any, index: number) => {
+                    let showitem = false;
+                    if (item.date - lastLastDate > 43200) {
+                        lastLastDate = item.date;
+                        showitem = true;
+                    }
+                    return (
+                        <>
+                            {showitem && (<Typography variant='h4'>{moment(item.date).format('MMMM D, YYYY')}</Typography>)}
+                            <Card classes={{ root: classes.card }}>
+                                <ListItem key={item?.url}>
 
-            </>
-            )
-            })}
-        </List>
+                                    <ListItemAvatar>
+                                        <Avatar alt="Favicon" src={item?.favicon} />
+                                    </ListItemAvatar>
+
+                                    <ListItemText primary={item?.url}
+                                        secondary={
+                                            <React.Fragment>
+                                                <Typography>
+                                                    {printDateInCorrectFormat(item.date)}
+                                                </Typography>
+                                                <Typography>
+                                                    {item?.text}
+                                                </Typography>
+                                            </React.Fragment>
+                                        } />
+                                    <IconButton color="primary" aria-label="View Note" onClick={(e) => handleHistory(item)}>
+                                        <InfoOutlinedIcon />
+                                    </IconButton>
+                                </ListItem>
+                            </Card>
+                        </>
+                    )
+                })}
+            </List>
         </>
     );
 }

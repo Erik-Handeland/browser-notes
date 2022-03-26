@@ -17,7 +17,8 @@ export type DraftType = {
 }
 
 export type HistoryType = {
-    id: number,
+    url: string,
+    favicon: string,
     text: string,
     date: Date,
 }
