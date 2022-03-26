@@ -1,28 +1,23 @@
-import React, { useEffect, useContext, useReducer, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { styled, alpha } from '@mui/material/styles';
 import { useHistory } from 'react-router-dom';
 import './App.css';
-import { AppBar, Box, createMuiTheme, createTheme, Divider, IconButton, Theme, ThemeProvider, Toolbar, Typography } from '@mui/material';
-import { makeStyles, createStyles, useTheme } from '@mui/styles';
-import { green, purple } from '@mui/material/colors';
-import { History as HistoryIcon, ChevronLeft, Settings as SettingsIcon, ContentPaste }  from '@mui/icons-material';
+import { AppBar, Box, createMuiTheme, Divider, IconButton, Theme, ThemeProvider, Toolbar } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { History as HistoryIcon, Settings as SettingsIcon, ContentPaste }  from '@mui/icons-material';
 import { AppProvider, AppContext } from './AppContext';
-import { DEFAULT_CONTEXT } from './constants'
 import { Storage } from './constants'
 import { Home } from './routes/Home';
 import { Settings } from './routes/Settings'
 import History from "./routes/History";
-import Result from './routes/Result';
-import { getLocalItem, getSyncItem } from './chrome/utils/storage';
-import usePasteBinSearch from './hooks/usePasteBinSearchJS';
+import { getSyncItem } from './chrome/storage';
 
 // declare module '@mui/styles/defaultTheme' {
 //     // eslint-disable-next-line @typescript-eslint/no-empty-interface (remove this line if you don't have the rule enabled)
 //     interface DefaultTheme extends Theme {}
 // }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
     root: {
         boxShadow: "none",
     },
@@ -49,12 +44,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export const App = () => {
 
-    const { state, dispatch } = React.useContext(AppContext);
-    const [history, setHistory] = useState([]);
-    const [appConfig, setAppConfig] = useState({})
     const [darkmode, setDarkmode] = useState(true);
 
-    let { push, goBack } = useHistory();
+    let { push } = useHistory();
 
     useEffect(() => {
         getSyncItem(Storage.THEME, (data) => {
@@ -63,7 +55,6 @@ export const App = () => {
     }, []);
 
     const classes = useStyles();
-
 
     const theme = createMuiTheme({
         palette: {
@@ -147,9 +138,6 @@ export const App = () => {
                 </Route>
                 <Route path="/history">
                     <History/>
-                </Route>
-                <Route path="/result">
-                    <Result/>
                 </Route>
                 <Route path="/">
                     <Home/>

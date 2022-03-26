@@ -5,7 +5,7 @@ import ListItemText from '@mui/material/ListItemText';
 import { Card, IconButton, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
-import { getLocalItem, getSyncItem } from '../chrome/utils/storage';
+import { getLocalItem, getSyncItem } from '../chrome/storage';
 import { Action, Storage } from '../constants'
 import moment from "moment";
 import { AppContext, HistoryType } from "../AppContext";
@@ -72,11 +72,7 @@ export default function History() {
     const handleHistory = (item: HistoryType) => {
         dispatch({type: Action.ADD_TO_HISTORY, payload: {
                 id: item.id,
-                pastebinlink: item.pastebinlink,
-                enc_mode: item.enc_mode,
-                key_length: item.key_length,
-                key: item.key,
-                enc_text: item.enc_text,
+                text: item.text,
                 date: item.date,
             }
         })
@@ -114,8 +110,8 @@ export default function History() {
             {showitem && (<Typography variant='h4'>{moment(item.date).format('MMMM D, YYYY')}</Typography>)}
             {/*{<Typography variant={'h4'}>Today</Typography>}*/}
             <Card classes={{root: classes.card}}>
-                <ListItem key={item?.pastebinlink}>
-                    <ListItemText primary={item?.pastebinlink ? item.pastebinlink : `${item.key_length * 8} ${item.enc_mode} Encrypted Plaintext`} secondary={printDateInCorrectFormat(item.date)} />
+                <ListItem key={item?.text}>
+                    <ListItemText primary={item?.text ? item.text : `${item.key_length * 8} ${item.enc_mode} Encrypted Plaintext`} secondary={printDateInCorrectFormat(item.date)} />
                     <IconButton color="primary" aria-label="Unlock CipherText" onClick={(e) => handleHistory(item)}>
                       <InfoOutlinedIcon />
                     </IconButton>

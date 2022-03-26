@@ -1,5 +1,5 @@
 import { DraftType, HistoryType, SettingsType } from "./AppContext";
-import { setSyncItem, getSyncItem } from "./chrome/utils/storage";
+import { setSyncItem, getSyncItem } from "./chrome/storage";
 import { Storage, Action, DEFAULT_CONTEXT } from "./constants"
 
 type ActionMap<M extends { [index: string]: any }> = {
@@ -16,11 +16,7 @@ type ActionMap<M extends { [index: string]: any }> = {
 type HistoryPayload = {
     [Action.ADD_TO_HISTORY] : {
         id: number,
-        pastebinlink: string,
-        enc_mode: string,
-        key_length: number,
-        key: string,
-        enc_text: string,
+        text: string,
         date: Date,
     };
     [Action.CLEAR_HISTORY] : undefined,
@@ -30,27 +26,9 @@ type HistoryPayload = {
 }
 
 type DraftPayload = {
-    [Action.ENCRYPT] : {
-        action: Action.ENCRYPT,
-        plaintext: string,
-        enc_text: string,
-        key: string,
-    };
-    [Action.ENCRYPT_PASTEBIN] : {
-        action: Action.ENCRYPT_PASTEBIN,
-        plaintext: string,
-        enc_text: string,
-        key: string,
-        pastebinlink: string,
-    };
     [Action.UPDATE_PLAINTEXT]: {
-        plaintext: string,
+        text: string,
         buttonEnabled: boolean,
-        action: Action.DECRYPT | Action.DECRYPT_PASTEBIN | Action.ENCRYPT | Action.ENCRYPT_PASTEBIN,
-    },
-    [Action.UPDATE_ENC_MENU]: {
-        buttonEnabled: boolean,
-        action: Action.DECRYPT | Action.DECRYPT_PASTEBIN | Action.ENCRYPT | Action.ENCRYPT_PASTEBIN,
     }
 }
 
@@ -76,11 +54,7 @@ export const historyReducer = (state: HistoryType[], action: SettingsActions | D
                 ...state,
                 {
                     id: action.payload.id,
-                    pastebinlink: action.payload.pastebinlink,
-                    enc_text: action.payload.enc_text,
-                    key: action.payload.key,
-                    enc_mode: action.payload.enc_mode,
-                    key_length: action.payload.key_length,
+                    text: action.payload.text,
                     date: action.payload.date,
                 }
             ]
@@ -97,34 +71,10 @@ export const historyReducer = (state: HistoryType[], action: SettingsActions | D
 
 export const draftReducer = (state: DraftType, action: SettingsActions | DraftActions | HistoryActions ) => {
     switch (action.type) {
-        case Action.ENCRYPT:
-            return {
-                    ...state,
-                    action: action.payload.action,
-                    plaintext: action.payload.plaintext,
-                enc_text: action.payload.enc_text,
-                    key: action.payload.key,
-            }
-        case Action.ENCRYPT_PASTEBIN:
-            return {
-                ...state,
-                action: action.payload.action,
-                plaintext: action.payload.plaintext,
-                enc_text: action.payload.enc_text,
-                key: action.payload.key,
-                pastebinlink: action.payload.pastebinlink,
-            }
         case Action.UPDATE_PLAINTEXT:
             return {
                 ...state,
-                plaintext: action.payload.plaintext,
-                action: action.payload.action,
-                buttonEnabled: action.payload.buttonEnabled,
-            }
-        case Action.UPDATE_ENC_MENU:
-            return {
-                ...state,
-                action: action.payload.action,
+                text: action.payload.text,
                 buttonEnabled: action.payload.buttonEnabled,
             }
         default:
@@ -145,9 +95,7 @@ export const settingsReducer = (state: SettingsType, action: SettingsActions | D
         case Action.RESET_SETTINGS:
             return {
                 ...state,
-                api_key: DEFAULT_CONTEXT.api_key,
-                enc_mode: DEFAULT_CONTEXT.enc_mode,
-                key_length: DEFAULT_CONTEXT.key_length,
+                cloud_sync: DEFAULT_CONTEXT.cloud_sync,
                 theme: DEFAULT_CONTEXT.theme,
             }
         default:
