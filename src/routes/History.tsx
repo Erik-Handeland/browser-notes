@@ -1,14 +1,13 @@
-import React, {useContext, useEffect } from "react";
+import React, {useEffect } from "react";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import { Card, IconButton, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { getLocalItem, getSyncItem } from '../chrome/storage';
+import { getLocalItem } from '../chrome/storage';
 import { Storage } from '../constants'
 import moment from "moment";
-import { AppContext, HistoryType } from "../AppContext";
-import { useHistory } from "react-router-dom";
+import {HistoryType } from "../AppContext";
 import { printDateInCorrectFormat } from "../chrome/utils";
 import clsx from "clsx";
 import HistoryIcon from '@mui/icons-material/History';
@@ -97,11 +96,10 @@ export default function History() {
                 return (
             <>
             {showitem && (<Typography variant='h4'>{moment(item.date).format('MMMM D, YYYY')}</Typography>)}
-            {/*{<Typography variant={'h4'}>Today</Typography>}*/}
             <Card classes={{root: classes.card}}>
                 <ListItem key={item?.text}>
-                    <ListItemText primary={item?.text ? item.text : `${item.key_length * 8} ${item.enc_mode} Encrypted Plaintext`} secondary={printDateInCorrectFormat(item.date)} />
-                    <IconButton color="primary" aria-label="Unlock CipherText" onClick={(e) => handleHistory(item)}>
+                    <ListItemText primary={item?.text} secondary={printDateInCorrectFormat(item.date)} />
+                    <IconButton color="primary" aria-label="View Note" onClick={(e) => handleHistory(item)}>
                       <InfoOutlinedIcon />
                     </IconButton>
                 </ListItem>
