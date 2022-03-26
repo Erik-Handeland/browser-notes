@@ -1,17 +1,17 @@
 import React, { useEffect, useContext } from "react";
-import { AppContext, Tab } from "../AppContext";
+import { AppContext, Tab } from "../app/AppContext";
 import Divider from '@mui/material/Divider';
 import SaveIcon from '@mui/icons-material/Save';
 import IconButton from '@mui/material/IconButton';
 import InputBase from '@mui/material/InputBase';
-import { MAX_TEXT_LENGTH, Action, Storage } from '../constants'
+import { MAX_TEXT_LENGTH, Action, Storage } from '../app/constants'
 import ErrorIcon from '@mui/icons-material/Error';
 import { Box, Typography } from '@mui/material';
 import clsx from 'clsx';
 import { makeStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
-import { addLocalItem } from "../chrome/storage";
-import { getCurrentTab } from '../chrome/utils';
+import { addLocalItem } from "../typescript/storage";
+import { getCurrentTab } from '../typescript/utils';
 
 const useStyles = makeStyles((theme: Theme) => ({
     counterContainer: {
@@ -149,7 +149,7 @@ export const Home = () => {
 
                 <InputBase
                     className={clsx(text.length < 30 && '24')}
-                    sx={{ width: 440, height: 464, overflow: 'hidden', fontSize: clsx(text.length < 350 ? '24px' : '16px'), textAlign: 'left', padding: 2 }}
+                    sx={{ width: 440, height: 440, overflow: 'hidden', fontSize: clsx(text.length < 350 ? '24px' : '16px'), textAlign: 'left', padding: 2 }}
                     multiline
                     autoFocus
                     onFocus={(e) =>

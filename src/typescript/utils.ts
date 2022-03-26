@@ -1,5 +1,5 @@
 import moment from "moment";
-import {Tab} from "../AppContext";
+import {Tab} from "../app/AppContext";
 
 export const getCurrentTab = (callback: (tab: Tab | undefined) => void): void => {
     const queryInfo = { active: true, lastFocusedWindow: true };

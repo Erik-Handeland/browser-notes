@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import './App.css';
 import { AppBar, Box, createMuiTheme, Divider, IconButton, ThemeProvider, Toolbar } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { History as HistoryIcon, Settings as SettingsIcon, ContentPaste }  from '@mui/icons-material';
 import { AppProvider } from './AppContext';
 import { Storage } from './constants'
-import { Home } from './routes/Home';
-import { Settings } from './routes/Settings'
-import History from "./routes/History";
-import { getSyncItem } from './chrome/storage';
+import { Home } from '../routes/Home';
+import { Settings } from '../routes/Settings'
+import History from "../routes/History";
+import { getSyncItem } from '../typescript/storage';
 
 // declare module '@mui/styles/defaultTheme' {
 //     // eslint-disable-next-line @typescript-eslint/no-empty-interface (remove this line if you don't have the rule enabled)

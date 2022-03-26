@@ -4,11 +4,11 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import { Card, IconButton, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { getLocalItem } from '../chrome/storage';
-import { Storage } from '../constants'
+import { getLocalItem } from '../typescript/storage';
+import { Storage } from '../app/constants'
 import moment from "moment";
-import {HistoryType } from "../AppContext";
-import { printDateInCorrectFormat } from "../chrome/utils";
+import {HistoryType } from "../app/AppContext";
+import { printDateInCorrectFormat } from "../typescript/utils";
 import clsx from "clsx";
 import HistoryIcon from '@mui/icons-material/History';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';

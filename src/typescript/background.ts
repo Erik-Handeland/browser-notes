@@ -1,6 +1,6 @@
 
 import { getSyncItemAsync, setSyncItem } from "./storage";
-import { Storage} from '../constants'
+import { Storage} from '../app/constants'
 
 /** Fired when the extension is first installed,
  *  when the extension is updated to a new version,

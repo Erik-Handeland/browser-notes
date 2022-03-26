@@ -4,8 +4,8 @@ import {
   Typography
 } from "@mui/material";
 import { makeStyles } from '@mui/styles';
-import { setSyncItem, getSyncItem, setLocalItem } from "../chrome/storage";
-import { Storage } from "../constants";
+import { setSyncItem, getSyncItem, setLocalItem } from "../typescript/storage";
+import { Storage } from "../app/constants";
 
 const useStyles = makeStyles(theme => ({
   card: {

@@ -32,18 +32,6 @@ export const setLocalItem = (key: string, value: any, callback?: () => void) => 
     chrome.storage.local.set({ [key]: value }, callback)
 }
 
-export const setLocalItemAsync = async (key: string, value: any) => {
-    return new Promise((resolve, reject) => {
-      try {
-        chrome.storage.local.set({[key]: value}, function() {
-          resolve(true);
-        });
-      } catch (ex) {
-        reject(ex);
-      }
-    });
-  };
-
 export const getLocalItem = (key: string | string[] | null, callback: (items: { [key: string]: any; }) => void) => {
     return chrome.storage.local.get(key, callback)
 }
@@ -54,14 +42,11 @@ export const deleteLocalItem = (key: string | string[], callback?: () => void) =
 
 export const addLocalItem = (key: string, value: any, callback?: () => void) => {
     getLocalItem(key, (data) => {
-        //console.log("DATA FROM ADD", data);
         let result = data[key];
         if (!result) {
             result = [];
         }
         result.push(value);
-        //console.log("ADDING ITEM", value)
-        //console.log("RESULTING VALUE", result)
         setLocalItem(key, result)
     })
 }
@@ -83,8 +68,4 @@ export const removeItem = (key: string, value: any, index: number, callback?: ()
         }
         return chrome.storage.local.set({ [key]: result }, callback)
     })
-}
-
-export const clearItems = (key: string, value: any, callback?: () => void) => {
-    return chrome.storage.local.set({ [key]: [] }, callback)
 }
