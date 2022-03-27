@@ -10,7 +10,7 @@ import { Box, Typography } from '@mui/material';
 import clsx from 'clsx';
 import { makeStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
-import { addLocalItem } from "../typescript/storage";
+import { addLocalItem, getNote } from "../typescript/storage";
 import { getCurrentTab } from '../typescript/utils';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -92,6 +92,13 @@ export const Home = () => {
             setTab(tab || { url: "", favicon: "" });
         })
     }, []);
+
+    useEffect(() => {
+        getNote(tab.url, (note) => {
+            setTextBox(note?.text || "");
+        })
+    }, [tab.url]);
+
 
     const performAction = async () => {
         const note = {

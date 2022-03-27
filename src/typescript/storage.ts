@@ -1,3 +1,5 @@
+import {Storage} from '../app/constants';
+import {NoteType} from '../app/AppContext';
 /////////////////////////  SYNC STORAGE //////////////////////////////
 // Chrome sync storage limit of 8,192 bytes per item, 102,400 Bytes total storage 
 export const setSyncItem = (key: string, value: any, callback?: () => void) => {
@@ -51,12 +53,11 @@ export const addLocalItem = (key: string, value: any, callback?: () => void) => 
     })
 }
 
-export const getItemAtIndex = (key: string, index: number, callback: (items: { [key: string]: any; }) => void) => {
-    getLocalItem(key, (data) => {
-        const result = data[key];
-        if (result && result.length > index) {
-            return result[index]
-        }
+export const getNote = (url: string, callback:(note: NoteType| undefined) => void) => {
+    getLocalItem(Storage.NOTES, (data)  => {
+        let notes = data[Storage.NOTES] as NoteType[];
+        let note = notes.find(n => n.url === url);
+        return callback(note)
     })
 }
 
@@ -69,3 +70,4 @@ export const removeItem = (key: string, value: any, index: number, callback?: ()
         return chrome.storage.local.set({ [key]: result }, callback)
     })
 }
+

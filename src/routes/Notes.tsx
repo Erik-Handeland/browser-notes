@@ -60,11 +60,9 @@ export default function Notes() {
     //TODO Add moment JS to calculate time
 
     useEffect(() => {
-
         getLocalItem(Storage.NOTES, (data) => {
             setNote(data[Storage.NOTES]);
         })
-
     }, []);
 
     return (
