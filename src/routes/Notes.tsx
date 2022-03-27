@@ -6,11 +6,13 @@ import { Avatar, Card, ListItemAvatar, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { getLocalItem } from '../typescript/storage';
 import { Storage } from '../app/constants'
+import {NoteType} from '../app/AppContext'
 import moment from "moment";
 import { printDateInCorrectFormat } from "../typescript/utils";
 import clsx from "clsx";
 import FolderIcon from '@mui/icons-material/Folder';
 import NoteDialog from "./templates/Dialog";
+import { useIndexedDB } from 'react-indexed-db';
 
 
 const useStyles = makeStyles(theme => ({
@@ -54,16 +56,28 @@ const useStyles = makeStyles(theme => ({
 
 
 export default function Notes() {
-    const [note, setNote] = React.useState([]);
+    const [run, setRun] = React.useState(true); // added cause useEffect was running multiple times
+    const result : NoteType[] = [];
+    const [note, setNote] = React.useState(result);
     const classes = useStyles();
     let lastLastDate = 0;
-    //TODO Add moment JS to calculate time
+    const db = useIndexedDB(Storage.NOTES);
 
     useEffect(() => {
-        getLocalItem(Storage.NOTES, (data) => {
-            setNote(data[Storage.NOTES]);
-        })
-    }, []);
+        if(run) {
+        db.getAll().then(data => {
+            console.log(data)
+            setNote(data)
+            console.log(note)
+          });
+          setRun(false)
+        }
+
+        // OLD
+        // getLocalItem(Storage.NOTES, (data) => {
+        //     setNote(data[Storage.NOTES]);
+        // })
+    }, [db, note, run]);
 
     return (
         <>
@@ -106,7 +120,7 @@ export default function Notes() {
                                                 </Typography>
                                             </React.Fragment>
                                         } />
-                                    <NoteDialog TAB={item}/>
+                                    <NoteDialog NOTE={item}/>
                                 </ListItem>
                             </Card>
                         </>

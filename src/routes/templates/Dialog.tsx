@@ -12,6 +12,7 @@ import { Avatar, Box, Card, Divider, IconButton, InputBase, ListItem, ListItemAv
 import { makeStyles, createStyles } from '@mui/styles';
 import { printDateInCorrectFormat } from '../../typescript/utils';
 import clsx from 'clsx';
+import { useIndexedDB } from 'react-indexed-db';
 
 
 const useStyles = makeStyles(theme => ({
@@ -25,8 +26,9 @@ const useStyles = makeStyles(theme => ({
 export default function NoteDialog(props: any) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-    const [textBox, setTextBox] = React.useState(props.TAB.text);
-    const [url, setURL] = React.useState(props.TAB.url);
+    const [textBox, setTextBox] = React.useState(props.NOTE.text);
+    const [url, setURL] = React.useState(props.NOTE.url);
+    const db = useIndexedDB(Storage.NOTES)
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -37,19 +39,25 @@ export default function NoteDialog(props: any) {
     };
 
     const handleSave = () => {
-        const note = {
+        var note = {
             url: url,
-            favicon: props.TAB.favicon,
+            favicon: props.NOTE.favicon,
             text: textBox,
             date: new Date().getTime(),
         }
         addLocalItem(Storage.NOTES, note);
+
+        note = Object.assign(props.NOTE, note) // package adds id to object, so we must add it
+        db.update(note).then(event => {
+            // updated
+        });
 
         setOpen(false);
         // TODO on close refresh notes view
     };
 
     const handelDelete = () => {
+        db.deleteRecord(props.NOTE.id)
         setOpen(false);
     };
 
@@ -73,7 +81,7 @@ export default function NoteDialog(props: any) {
                 <DialogTitle sx={{
                     width: 320,
                 }}>
-                    <Typography variant={'h3'}>Note: {props.TAB.url}</Typography>
+                    <Typography variant={'h3'}>Note: {props.NOTE.url}</Typography>
                     {/* TODO url pretty */}
                 </DialogTitle>
                 <Divider />
@@ -84,7 +92,7 @@ export default function NoteDialog(props: any) {
 
                     <ListItem key={""}>
                         <ListItemAvatar>
-                            <Avatar alt="Favicon" src={props.TAB.favicon} />
+                            <Avatar alt="Favicon" src={props.NOTE.favicon} />
                         </ListItemAvatar>
 
                         <ListItemText primary={
@@ -99,13 +107,13 @@ export default function NoteDialog(props: any) {
                                 value={url}
                             />
                         }
-                            secondary={printDateInCorrectFormat(props.TAB.date)} />
+                            secondary={printDateInCorrectFormat(props.NOTE.date)} />
                     </ListItem>
                     <Divider />
 
                     <InputBase
-                        className={clsx(props.TAB.text.length < 30 && '24')}
-                        sx={{ overflow: 'hidden', fontSize: clsx(props.TAB.text.length < 320 ? '16px' : '12px'), width: '100%'}}
+                        className={clsx(props.NOTE.text.length < 30 && '24')}
+                        sx={{ overflow: 'hidden', fontSize: clsx(props.NOTE.text.length < 320 ? '16px' : '12px'), width: '100%' }}
                         multiline
                         autoFocus
                         onFocus={(e) =>
@@ -113,7 +121,7 @@ export default function NoteDialog(props: any) {
                                 e.currentTarget.value.length,
                                 e.currentTarget.value.length
                             )}
-                        rows={clsx(props.TAB.text.length < 320 ? 12 : 20)}
+                        rows={clsx(props.NOTE.text.length < 320 ? 12 : 20)}
                         onChange={updateNoteText}
                         value={textBox}
                     />

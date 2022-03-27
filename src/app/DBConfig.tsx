@@ -5,7 +5,7 @@ export const DBConfig = {
     version: 1,
     objectStoresMeta: [
       {
-        store: 'notes',
+        store: Storage.NOTES,
         storeConfig: { keyPath: 'id', autoIncrement: true },
         storeSchema: [
           { name: 'url', keypath: 'url', options: { unique: true } },

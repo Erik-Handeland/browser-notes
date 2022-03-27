@@ -21,6 +21,7 @@ export type NoteType = {
     favicon: string,
     text: string,
     date: Date,
+  //  id: Number
 }
 
 type InitialStateType = {

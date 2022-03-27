@@ -10,8 +10,8 @@ import { Box, Typography } from '@mui/material';
 import clsx from 'clsx';
 import { makeStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
-import { addLocalItem, getNote } from "../typescript/storage";
 import { getCurrentTab } from '../typescript/utils';
+import { useIndexedDB } from 'react-indexed-db';
 
 const useStyles = makeStyles((theme: Theme) => ({
     counterContainer: {
@@ -76,12 +76,14 @@ export function TextCounter(props: any) {
 
 
 export const Home = () => {
+    const [run, setRun] = React.useState(true); // added cause useEffect was running multiple times
     const classes = useStyles();
     const { state, dispatch } = useContext(AppContext);
     const buttonEnabled = state.draft.buttonEnabled;
     const text = state.draft.text;
     const [textBox, setTextBox] = React.useState(text);
-    const [tab, setTab] = React.useState<Tab>({ url: "", favicon: "" });
+    const [TAB, setTab] = React.useState<Tab>({ url: "", favicon: "" });
+    const db = useIndexedDB(Storage.NOTES);
 
     const handleClick = (event: any) => {
         performAction();
@@ -93,22 +95,47 @@ export const Home = () => {
         })
     }, []);
 
+    // populate textbox with current note
     useEffect(() => {
-        getNote(tab.url, (note) => {
-            setTextBox(note?.text || "");
-        })
-    }, [tab.url]);
+        if (run && TAB.url !== "") {
+            db.getByIndex('url', TAB.url).then(res => {
+                console.log("res: ",res)
+                setTextBox(res?.text || "");
+            })
+            setRun(false)
+        }
+
+    }, [db, run, TAB]);
 
 
     const performAction = async () => {
-        const note = {
-            url: tab.url,
-            favicon: tab.favicon,
+        var note = {
+            url: TAB.url,
+            favicon: TAB.favicon,
             text: textBox,
             date: new Date().getTime(),
         }
 
-        addLocalItem(Storage.NOTES, note);
+        // addLocalItem(Storage.NOTES, note); // old local storage, switch to indexedDB
+
+        db.getByIndex('url', TAB.url).then(res => {
+            if (res) { // url already exists, update
+                note = Object.assign(res, note) // package adds id to object, so we must add it
+                db.update(note).then(event => {
+                    // updated
+                });
+            } else {
+                db.add(note).then(
+                    event => {
+                        //console.log('ID Generated: ', event.valueOf());
+                        // successfully added to DB
+                    },
+                    error => { // Error occured try to update instead
+                        console.log(error);
+                    }
+                );
+            }
+        });
     }
 
     const updateNoteText = (e: any) => {
@@ -123,7 +150,7 @@ export const Home = () => {
 
     const updateUrlText = (e: any) => {
         let textbox = e.target.value || "";
-        setTab({ url: textbox, favicon: tab.favicon }); // TODO if url is update to new domain, favicon will be invalid
+        setTab({ url: textbox, favicon: TAB.favicon }); // TODO if url is update to new domain, favicon will be invalid
         dispatch({ type: Action.UPDATE_TEXT, payload: { text: textbox, buttonEnabled: buttonEnabled } }); //TODO add url to payload
     };
 
@@ -138,9 +165,10 @@ export const Home = () => {
                         sx={{
                             height: 32,
                             width: 32,
+                            pl: 2,
                         }}
                         alt="Favicon"
-                        src={tab.favicon}
+                        src={TAB.favicon}
                     />
                     <InputBase
                         sx={{ width: 440, height: 10, overflow: 'hidden', fontSize: '12px', textAlign: 'right', padding: 2 }}
@@ -150,7 +178,7 @@ export const Home = () => {
                                 e.currentTarget.value.length
                             )}
                         onChange={updateUrlText}
-                        value={tab.url}
+                        value={TAB.url}
                         inputProps={{ 'aria-label': 'Note window', 'height': '300px' }}
                     />
                 </Box>

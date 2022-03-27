@@ -6,6 +6,7 @@ import {
 import { makeStyles } from '@mui/styles';
 import { setSyncItem, getSyncItem, setLocalItem } from "../typescript/storage";
 import { Storage } from "../app/constants";
+import { useIndexedDB } from 'react-indexed-db';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -41,6 +42,7 @@ export const Settings = () => {
   const classes = useStyles();
   const [CLOUD_SYNC, setSyncMode] = useState(false);
   const [THEME, setTheme] = useState(false);
+  const db = useIndexedDB(Storage.NOTES)
 
   useEffect(() => {
     getSettings();
@@ -59,7 +61,8 @@ export const Settings = () => {
   }
 
   const deleteNotes = (e: any) => {
-    setLocalItem(Storage.NOTES, []);
+    // setLocalItem(Storage.NOTES, []);
+    db.clear();
   }
 
   const themeHandler = (e: any) => {
