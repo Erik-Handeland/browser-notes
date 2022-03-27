@@ -11,6 +11,10 @@ import { Settings } from '../routes/Settings'
 import Notes from "../routes/Notes";
 import { getSyncItem } from '../typescript/storage';
 
+import { DBConfig } from './DBConfig';
+import { initDB } from 'react-indexed-db';
+initDB(DBConfig);
+
 // declare module '@mui/styles/defaultTheme' {
 //     // eslint-disable-next-line @typescript-eslint/no-empty-interface (remove this line if you don't have the rule enabled)
 //     interface DefaultTheme extends Theme {}

@@ -14,7 +14,8 @@ export enum Storage {
     THEME = "theme",
     CLOUD_SYNC = "cloud_sync",
     NOTES = "notes",
-    SETTINGS = "settings"
+    SETTINGS = "settings",
+    DB_NAME = "NotesDB"
 }
 
 export enum Action {
