@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AppBar, Box, createMuiTheme, Divider, IconButton, ThemeProvider, Toolbar } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import {NoteAdd as NoteAddIcon, Folder as FolderIcon, Settings as SettingsIcon }  from '@mui/icons-material';
@@ -48,8 +48,7 @@ const useStyles = makeStyles(() => ({
 export const App = () => {
 
     const [darkmode, setDarkmode] = useState(true);
-
-    let { push } = useHistory();
+    const navigate = useNavigate();
 
     useEffect(() => {
         getSyncItem(Storage.THEME, (data) => {
@@ -115,15 +114,15 @@ export const App = () => {
             <div className={classes.background}>
                 <AppBar sx={{bgcolor: 'background.default'}} className={classes.root} position="fixed" enableColorOnDark>
                     <Toolbar>
-                        <img className={classes.hoverStyle} src={darkmode ? '/securebinlogo_dark.svg' : '/securebinlogo.svg'} alt="logo" onClick={() => { push('/home')}}/>
+                        <img className={classes.hoverStyle} src={darkmode ? '/securebinlogo_dark.svg' : '/securebinlogo.svg'} alt="logo" onClick={() => { navigate('/home')}}/>
                         <div style={{marginLeft: 'auto'}}>
-                            {<IconButton className={classes.hoverStyle} aria-label="Note" sx={{ mr: 1 }} disableRipple onClick={() => { push('/home')}}>
+                            {<IconButton className={classes.hoverStyle} aria-label="Note" sx={{ mr: 1 }} disableRipple onClick={() => { navigate('/home')}}>
                             <NoteAddIcon />
                             </IconButton>}
-                            <IconButton className={classes.hoverStyle} aria-label="Notes Folder" sx={{ mr: 1 }} disableRipple onClick={() => { push('/notes')}}>
+                            <IconButton className={classes.hoverStyle} aria-label="Notes Folder" sx={{ mr: 1 }} disableRipple onClick={() => { navigate('/notes')}}>
                                 <FolderIcon />
                             </IconButton>
-                            <IconButton className={classes.hoverStyle} aria-label="Settings" disableRipple onClick={() => { push('/settings')}}>
+                            <IconButton className={classes.hoverStyle} aria-label="Settings" disableRipple onClick={() => { navigate('/settings')}}>
                                 <SettingsIcon />
                             </IconButton>
                         </div>
@@ -132,7 +131,7 @@ export const App = () => {
                 </AppBar>
             </div>
             <Box className={classes.content} sx={{bgcolor: 'background.default', color: 'text.primary'}}>
-            <Switch >
+            <Routes >
                 <Route path="/home">
                     <Home/>
                 </Route>
@@ -145,7 +144,7 @@ export const App = () => {
                 <Route path="/">
                     <Home/>
                 </Route>
-            </Switch>
+            </Routes>
             </Box>
             </>
          </AppProvider>
