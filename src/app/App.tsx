@@ -3,12 +3,12 @@ import { Route, Switch } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { AppBar, Box, createMuiTheme, Divider, IconButton, ThemeProvider, Toolbar } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { History as HistoryIcon, Settings as SettingsIcon, ContentPaste }  from '@mui/icons-material';
+import {NoteAdd as NoteAddIcon, Folder as FolderIcon, Settings as SettingsIcon }  from '@mui/icons-material';
 import { AppProvider } from './AppContext';
 import { Storage } from './constants'
 import { Home } from '../routes/Home';
 import { Settings } from '../routes/Settings'
-import History from "../routes/History";
+import Notes from "../routes/Notes";
 import { getSyncItem } from '../typescript/storage';
 
 // declare module '@mui/styles/defaultTheme' {
@@ -114,10 +114,10 @@ export const App = () => {
                         <img className={classes.hoverStyle} src={darkmode ? '/securebinlogo_dark.svg' : '/securebinlogo.svg'} alt="logo" onClick={() => { push('/home')}}/>
                         <div style={{marginLeft: 'auto'}}>
                             {<IconButton className={classes.hoverStyle} aria-label="Note" sx={{ mr: 1 }} disableRipple onClick={() => { push('/home')}}>
-                            <ContentPaste />
+                            <NoteAddIcon />
                             </IconButton>}
-                            <IconButton className={classes.hoverStyle} aria-label="History" sx={{ mr: 1 }} disableRipple onClick={() => { push('/history')}}>
-                                <HistoryIcon />
+                            <IconButton className={classes.hoverStyle} aria-label="Notes Folder" sx={{ mr: 1 }} disableRipple onClick={() => { push('/notes')}}>
+                                <FolderIcon />
                             </IconButton>
                             <IconButton className={classes.hoverStyle} aria-label="Settings" disableRipple onClick={() => { push('/settings')}}>
                                 <SettingsIcon />
@@ -135,8 +135,8 @@ export const App = () => {
                 <Route path="/settings">
                     <Settings/>
                 </Route>
-                <Route path="/history">
-                    <History/>
+                <Route path="/notes">
+                    <Notes/>
                 </Route>
                 <Route path="/">
                     <Home/>

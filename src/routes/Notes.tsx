@@ -7,10 +7,9 @@ import { makeStyles } from '@mui/styles';
 import { getLocalItem } from '../typescript/storage';
 import { Storage } from '../app/constants'
 import moment from "moment";
-import { HistoryType } from "../app/AppContext";
 import { printDateInCorrectFormat } from "../typescript/utils";
 import clsx from "clsx";
-import HistoryIcon from '@mui/icons-material/History';
+import FolderIcon from '@mui/icons-material/Folder';
 import NoteDialog from "./templates/Dialog";
 
 
@@ -54,40 +53,35 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function History() {
-    const [history, setHistory] = React.useState([]);
+export default function Notes() {
+    const [note, setNote] = React.useState([]);
     const classes = useStyles();
     let lastLastDate = 0;
     //TODO Add moment JS to calculate time
 
     useEffect(() => {
 
-        getLocalItem(Storage.HISTORY, (data) => {
-            //console.log("HISTORY", data[Storage.HISTORY]);
-            setHistory(data[Storage.HISTORY]);
+        getLocalItem(Storage.NOTES, (data) => {
+            setNote(data[Storage.NOTES]);
         })
 
     }, []);
 
-    const handleHistory = (item: HistoryType) => {
-        console.log("CLICKED", item);
-    }
-
     return (
         <>
             {/* @ts-ignore */}
-            {!history && !history?.length ? (
+            {!note && !note?.length ? (
                 <div className={classes.center}>
-                    <HistoryIcon className={clsx(classes.icon, classes.grey)} />
-                    <Typography variant={'h2'}>No History</Typography>
+                    <FolderIcon className={clsx(classes.icon, classes.grey)} />
+                    <Typography variant={'h2'}>No Notes</Typography>
                 </div>
             ) :
                 (
-                    <Typography variant='h2' className={classes.pageHeading}>History</Typography>
+                    <Typography variant='h2' className={classes.pageHeading}>Notes</Typography>
                 )
             }
             <List className={classes.list} >
-                {history?.reverse().map((item: any, index: number) => {
+                {note?.reverse().map((item: any, index: number) => {
                     let showitem = false;
                     if (item.date - lastLastDate > 43200) {
                         lastLastDate = item.date;

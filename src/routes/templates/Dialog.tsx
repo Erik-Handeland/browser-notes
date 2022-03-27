@@ -37,16 +37,16 @@ export default function NoteDialog(props: any) {
     };
 
     const handleSave = () => {
-        const history = {
+        const note = {
             url: url,
             favicon: props.TAB.favicon,
             text: textBox,
             date: new Date().getTime(),
         }
-        addLocalItem(Storage.HISTORY, history);
+        addLocalItem(Storage.NOTES, note);
 
         setOpen(false);
-        // TODO on close refresh history view
+        // TODO on close refresh notes view
     };
 
     const handelDelete = () => {

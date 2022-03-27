@@ -7,13 +7,13 @@ export const DEFAULT_CONTEXT = {
     theme: false,
     cloud_sync: false,
     settings: DEFAULT_SETTINGS,
-    history: []
+    notes: []
 }
 
 export enum Storage {
     THEME = "theme",
     CLOUD_SYNC = "cloud_sync",
-    HISTORY = "history",
+    NOTES = "notes",
     SETTINGS = "settings"
 }
 

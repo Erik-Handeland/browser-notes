@@ -16,7 +16,7 @@ export type DraftType = {
     buttonEnabled: boolean,
 }
 
-export type HistoryType = {
+export type NoteType = {
     url: string,
     favicon: string,
     text: string,

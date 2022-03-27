@@ -58,8 +58,8 @@ export const Settings = () => {
     })
   }
 
-  const clearHistory = (e: any) => {
-    setLocalItem(Storage.HISTORY, []);
+  const deleteNotes = (e: any) => {
+    setLocalItem(Storage.NOTES, []);
   }
 
   const themeHandler = (e: any) => {
@@ -92,8 +92,8 @@ export const Settings = () => {
         <Card classes={{ root: classes.card }}>
           <ListItem>
             <ListItemText
-              primary="Clear History" />
-            <Button onClick={clearHistory}>Clear</Button>
+              primary="Delete all Notes" />
+            <Button onClick={deleteNotes}>Delete</Button>
           </ListItem>
         </Card>
 

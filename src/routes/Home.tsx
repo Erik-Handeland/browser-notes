@@ -94,14 +94,14 @@ export const Home = () => {
     }, []);
 
     const performAction = async () => {
-        const history = {
+        const note = {
             url: tab.url,
             favicon: tab.favicon,
             text: textBox,
             date: new Date().getTime(),
         }
 
-        addLocalItem(Storage.HISTORY, history);
+        addLocalItem(Storage.NOTES, note);
     }
 
     const updateNoteText = (e: any) => {
