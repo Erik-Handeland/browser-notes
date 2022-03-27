@@ -4,7 +4,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import { Avatar, Card, ListItemAvatar, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { getLocalItem } from '../typescript/storage';
 import { Storage } from '../app/constants'
 import {NoteType} from '../app/AppContext'
 import moment from "moment";

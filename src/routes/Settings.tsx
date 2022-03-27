@@ -4,7 +4,7 @@ import {
   Typography
 } from "@mui/material";
 import { makeStyles } from '@mui/styles';
-import { setSyncItem, getSyncItem, setLocalItem } from "../typescript/storage";
+import { setSyncItem, getSyncItem } from "../typescript/storage";
 import { Storage } from "../app/constants";
 import { useIndexedDB } from 'react-indexed-db';
 

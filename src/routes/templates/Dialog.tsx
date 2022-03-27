@@ -3,28 +3,17 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import { setSyncItem, getSyncItem, addLocalItem } from "../../typescript/storage";
+import { addLocalItem } from "../../typescript/storage";
 import { Storage } from "../../app/constants";
-import { Avatar, Box, Card, Divider, IconButton, InputBase, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
-import { makeStyles, createStyles } from '@mui/styles';
+import { Avatar, Divider, IconButton, InputBase, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
 import { printDateInCorrectFormat } from '../../typescript/utils';
 import clsx from 'clsx';
 import { useIndexedDB } from 'react-indexed-db';
 
 
-const useStyles = makeStyles(theme => ({
-    dialog: {
-        width: '440',
-    },
-}));
-
-
-
 export default function NoteDialog(props: any) {
-    const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [textBox, setTextBox] = React.useState(props.NOTE.text);
     const [url, setURL] = React.useState(props.NOTE.url);
