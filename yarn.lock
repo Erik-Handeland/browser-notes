@@ -1827,7 +1827,15 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16", "@types/react@^16.9.53":
+"@types/react@*", "@types/react@^17.0.43":
+  version "17.0.43"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.43.tgz#4adc142887dd4a2601ce730bc56c3436fdb07a55"
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/scheduler" "*"
+    csstype "^3.0.2"
+
+"@types/react@^16":
   version "16.14.24"
   resolved "https://registry.npmjs.org/@types/react/-/react-16.14.24.tgz"
   dependencies:
@@ -7963,9 +7971,9 @@ wcwidth@^1.0.1:
   dependencies:
     defaults "^1.0.3"
 
-web-vitals@^2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/web-vitals/-/web-vitals-2.1.4.tgz#76563175a475a5e835264d373704f9dde718290c"
+web-vitals@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.npmjs.org/web-vitals/-/web-vitals-0.2.4.tgz"
 
 webidl-conversions@^4.0.2:
   version "4.0.2"
