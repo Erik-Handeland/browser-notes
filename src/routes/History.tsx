@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import { Avatar, Box, Card, IconButton, ListItemAvatar, Typography } from '@mui/material';
+import { Avatar, Card, ListItemAvatar, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { getLocalItem } from '../typescript/storage';
 import { Storage } from '../app/constants'
@@ -11,7 +11,7 @@ import { HistoryType } from "../app/AppContext";
 import { printDateInCorrectFormat } from "../typescript/utils";
 import clsx from "clsx";
 import HistoryIcon from '@mui/icons-material/History';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import NoteDialog from "./templates/Dialog";
 
 
 const useStyles = makeStyles(theme => ({
@@ -114,9 +114,7 @@ export default function History() {
                                                 </Typography>
                                             </React.Fragment>
                                         } />
-                                    <IconButton color="primary" aria-label="View Note" onClick={(e) => handleHistory(item)}>
-                                        <InfoOutlinedIcon />
-                                    </IconButton>
+                                    <NoteDialog TAB={item}/>
                                 </ListItem>
                             </Card>
                         </>
