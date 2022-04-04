@@ -1312,13 +1312,14 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@mui/base@5.0.0-alpha.73":
-  version "5.0.0-alpha.73"
-  resolved "https://registry.npmjs.org/@mui/base/-/base-5.0.0-alpha.73.tgz"
+"@mui/base@5.0.0-alpha.74":
+  version "5.0.0-alpha.74"
+  resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-alpha.74.tgz#15509242e7911446d5957375b1b18cbb72b3a750"
   dependencies:
     "@babel/runtime" "^7.17.2"
     "@emotion/is-prop-valid" "^1.1.2"
-    "@mui/utils" "^5.4.4"
+    "@mui/types" "^7.1.3"
+    "@mui/utils" "^5.5.3"
     "@popperjs/core" "^2.11.4"
     clsx "^1.1.1"
     prop-types "^15.7.2"
@@ -1330,15 +1331,15 @@
   dependencies:
     "@babel/runtime" "^7.17.2"
 
-"@mui/material@^5.4.2":
-  version "5.5.2"
-  resolved "https://registry.npmjs.org/@mui/material/-/material-5.5.2.tgz"
+"@mui/material@^5.5.3":
+  version "5.5.3"
+  resolved "https://registry.yarnpkg.com/@mui/material/-/material-5.5.3.tgz#411e53a69da3f9d6664e99f1bdcdaf2760540fdc"
   dependencies:
     "@babel/runtime" "^7.17.2"
-    "@mui/base" "5.0.0-alpha.73"
-    "@mui/system" "^5.5.2"
+    "@mui/base" "5.0.0-alpha.74"
+    "@mui/system" "^5.5.3"
     "@mui/types" "^7.1.3"
-    "@mui/utils" "^5.4.4"
+    "@mui/utils" "^5.5.3"
     "@types/react-transition-group" "^4.4.4"
     clsx "^1.1.1"
     csstype "^3.0.11"
@@ -1347,7 +1348,7 @@
     react-is "^17.0.2"
     react-transition-group "^4.4.2"
 
-"@mui/private-theming@^5.4.4", "@mui/private-theming@^5.5.3":
+"@mui/private-theming@^5.5.3":
   version "5.5.3"
   resolved "https://registry.yarnpkg.com/@mui/private-theming/-/private-theming-5.5.3.tgz#c232a39dd3c268fdef7e92ccc40d51bda9eec3ab"
   dependencies:
@@ -1385,15 +1386,15 @@
     jss-plugin-vendor-prefixer "^10.8.2"
     prop-types "^15.7.2"
 
-"@mui/system@^5.5.2":
-  version "5.5.2"
-  resolved "https://registry.npmjs.org/@mui/system/-/system-5.5.2.tgz"
+"@mui/system@^5.5.3":
+  version "5.5.3"
+  resolved "https://registry.yarnpkg.com/@mui/system/-/system-5.5.3.tgz#c78d4c16009430389ffd3495d694945422d72ca5"
   dependencies:
     "@babel/runtime" "^7.17.2"
-    "@mui/private-theming" "^5.4.4"
+    "@mui/private-theming" "^5.5.3"
     "@mui/styled-engine" "^5.5.2"
     "@mui/types" "^7.1.3"
-    "@mui/utils" "^5.4.4"
+    "@mui/utils" "^5.5.3"
     clsx "^1.1.1"
     csstype "^3.0.11"
     prop-types "^15.7.2"
@@ -1402,7 +1403,7 @@
   version "7.1.3"
   resolved "https://registry.npmjs.org/@mui/types/-/types-7.1.3.tgz"
 
-"@mui/utils@^5.4.4", "@mui/utils@^5.5.3":
+"@mui/utils@^5.5.3":
   version "5.5.3"
   resolved "https://registry.yarnpkg.com/@mui/utils/-/utils-5.5.3.tgz#f6e1f10c0e8f4d0bf750588c2c3a96ad819c5b65"
   dependencies:
