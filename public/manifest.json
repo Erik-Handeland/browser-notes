@@ -18,9 +18,7 @@
   },
   "permissions": [
     "tabs",
-    "storage",
-    "contextMenus",
-    "clipboardWrite"
+    "storage"
   ],
   "optional_permissions": [
     "<all_urls>"
