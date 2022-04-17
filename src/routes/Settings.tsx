@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
 
 export const Settings = () => {
   const classes = useStyles();
-  const [CLOUD_SYNC, setSyncMode] = useState(false);
+  //const [CLOUD_SYNC, setSyncMode] = useState(false);
   const [THEME, setTheme] = useState(false);
   const db = useIndexedDB(Storage.NOTES)
 
@@ -50,9 +50,9 @@ export const Settings = () => {
 
   function getSettings(): any {
 
-    getSyncItem(Storage.CLOUD_SYNC, (data) => {
-      setSyncMode(data[Storage.CLOUD_SYNC]);
-    })
+    // getSyncItem(Storage.CLOUD_SYNC, (data) => {
+    //   setSyncMode(data[Storage.CLOUD_SYNC]);
+    // })
 
     getSyncItem(Storage.THEME, (data) => {
       setTheme(data[Storage.THEME]);
@@ -83,13 +83,13 @@ export const Settings = () => {
           </ListItem>
         </Card>
 
-        <Typography variant={'h4'}>Sync Settings</Typography>
+        {/* <Typography variant={'h4'}>Sync Settings</Typography>
         <Card classes={{ root: classes.card }}>
           <ListItem>
             <ListItemText primary="Cloud Sync" />
             <Checkbox checked={CLOUD_SYNC} onChange={themeHandler} />
           </ListItem>
-        </Card>
+        </Card> */}
 
         <Typography variant={'h4'}>Reset</Typography>
         <Card classes={{ root: classes.card }}>

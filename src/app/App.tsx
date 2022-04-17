@@ -115,7 +115,7 @@ export const App = () => {
             <div className={classes.background}>
                 <AppBar sx={{bgcolor: 'background.default'}} className={classes.root} position="fixed" enableColorOnDark>
                     <Toolbar>
-                        <img className={classes.hoverStyle} src={darkmode ? '/securebinlogo_dark.svg' : '/securebinlogo.svg'} alt="logo" onClick={() => { navigate('/')}}/>
+                        <img className={classes.hoverStyle} src={darkmode ? '/logo_dark.svg' : '/logo.png'} width="200px" alt="logo" onClick={() => { navigate('/')}}/>
                         <div style={{marginLeft: 'auto'}}>
                             {<IconButton className={classes.hoverStyle} aria-label="Note" sx={{ mr: 1 }} disableRipple onClick={() => { navigate('/home')}}>
                             <NoteAddIcon />
