@@ -1,7 +1,7 @@
 {
   "name": "Browser Notes",
   "description" : "Quickly save notes for sites you visit. Save locally or sync with your Google Account.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "manifest_version": 3,
   "action": {
     "default_popup": "index.html",
